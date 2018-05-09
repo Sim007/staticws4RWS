@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: staticws4rws-deployment
+  labels:
+    app: staticws4rws
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: staticws4rws
+  template:
+    metadata:
+      labels:
+        app: staticws4rws
+    spec:
+      containers:
+      - name: staticws4rws
+        image: harbor.test-cf-infra.rws.local/ivs/staticws4rws
+        ports:
+        - containerPort: 80
+      nodeSelector:
+        beta.kubernetes.io/os: linux
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: staticws4rws-service
+spec:
+  selector:
+    app: staticws4rws
+  ports:
+  - protocol: TCP
+    port: 4201
+    targetPort: 80
+  type: NodePort       
