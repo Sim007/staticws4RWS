@@ -8,8 +8,6 @@ LABEL MAINTAINER="Johannes Sim" \
       REFRESHED_AT="2018-09-02"
 
 
-# build:  docker image build -t staticws4rws:latest .
-
 # Docker build
 #build:   docker image build -t staticws4rws:latest .
 
@@ -20,7 +18,7 @@ LABEL MAINTAINER="Johannes Sim" \
 # compose: docker-compose up -d
 
 # K8s
-# run:    kubctl apply -f staticws4rws.yaml
+# run:    kubectl apply -f staticws4rwsD4W.yaml
 
 # Dockerhub
 # tag:    docker tag staticws4rws:latest sim007/staticws4rws:latest
