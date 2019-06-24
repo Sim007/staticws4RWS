@@ -1,7 +1,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: staticws4rws-deployment
+  name: staticws4rws
+  namespace: ivs-next
   labels:
     app: staticws4rws
 spec:
@@ -16,21 +17,42 @@ spec:
     spec:
       containers:
       - name: staticws4rws
-        image: harbor.test-cf-infra.rws.local/ivs-next/staticws4rws
+        image: harbor.test-cf-infra.rws.local/ivs-next/staticws4rws:01.00.00.1
         ports:
         - containerPort: 80
-      nodeSelector:
-        beta.kubernetes.io/os: linux
+      imagePullSecrets:
+      - name: harbor
 ---
-kind: Service
 apiVersion: v1
+kind: Service
 metadata:
-  name: staticws4rws-service
+  name: staticws4rws
+  namespace: ivs-next
 spec:
   selector:
     app: staticws4rws
   ports:
   - protocol: TCP
-    port: 4200
-    targetPort: 80
-  type: LoadBalancer        
+    port: 80
+    targetPort: 80   
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: staticws4rws
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    ingress.kubernetes.io/ssl-redirect: "false"
+    # traefik.ingress.kubernetes.io/app-root: "/app-root"
+  namespace: ivs-next
+spec:
+  rules:
+  - host: rwsdemo.k8s.env.cloudboostr.intranet.rws.nl
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: staticws4rws
+          servicePort: 80
+
+
