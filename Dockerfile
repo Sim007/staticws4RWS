@@ -12,7 +12,7 @@ LABEL MAINTAINER="Johannes Sim" \
 #build:   docker image build -t staticws4rws:latest .
 
 # Docker
-#run  :   docker container run --name staticws4rws -d -p 4200:80 staticws4rws:latest
+#run  :   docker container run --name staticws4rws -d -p 4400:80 staticws4rws:latest
 
 # Docker-compose
 # compose: docker-compose up -d
@@ -24,6 +24,12 @@ LABEL MAINTAINER="Johannes Sim" \
 # tag:    docker tag staticws4rws:latest sim007/staticws4rws:latest
 # push:   docker push sim007/staticws4rws:latest
 # pull:   docker pull sim007/staticws4rws:latest
+
+# Azure ACR: simcontainers.azurecr.io
+# docker tag staticws4rws simcontainers.azurecr.io/sim007/staticws4rws
+# docker login
+# docker push simcontainers.azurecr.io/sim007/staticws4rws:latest
+
 
 # Harbor:
 # build:  docker image build -t harbor.test-cf-infra.rws.local/demo/staticws4rws:latest .

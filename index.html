@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<body>
+<body onload="myFunction()">
 
 <h1>Hello RWS Website</h1>
 
@@ -8,6 +8,16 @@
 
 <img src="RWS.png" alt="rws.nl">
 
-<p>Container: 01.00.00.20190605 - 2019 - RWS CIV OSR SVM CD team</p>
+<p>Container: 2019 - RWS CIV OSR SVM CD team</p>
+<p></p>
+<p>Host: 
+<span id="demo"></span>
+</p>
+<script>
+function myFunction() {
+  var x = location.hostname;
+  document.getElementById("demo").innerHTML= x;
+}
+</script>
 </body>
 </html>
